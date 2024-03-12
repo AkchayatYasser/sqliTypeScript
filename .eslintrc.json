@@ -1,0 +1,9 @@
+{
+    "parser": "@typescript-eslint/parser",  // Use TypeScript parser
+    "plugins": ["@typescript-eslint"],      // Enable TypeScript-specific rules
+    "extends": [
+      "eslint:recommended",                // Extend recommended ESLint rules
+      "plugin:@typescript-eslint/recommended" // Extend recommended TypeScript-specific rules
+    ]
+  }
+  

@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "es6",                 // Target ECMAScript 2015 (ES6)
+      "module": "commonjs",          // Use CommonJS modules (default)
+      "outDir": "dist",               // Output compiled JavaScript files to the 'dist' folder
+      "sourceMap": true,            // Generate source maps for debugging
+      "strict": true,                // Enable strict mode for type checking
+      "esModuleInterop": true,       // Enable automatic module resolution for CommonJS and ES modules
+      "forceConsistentCasingInFileNames": true // Ensure consistent file naming (optional)
+    },
+    "include": ["src/**/*.ts"],   // Include all TypeScript files from the 'src' folder and its subdirectories
+    "exclude": ["node_modules/**"] // Exclude the 'node_modules' folder
+  }
+  

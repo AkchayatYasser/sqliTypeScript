@@ -1,3 +1,4 @@
+"use strict";
 var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
     function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
     var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
@@ -37,28 +38,61 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
     return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
 };
 function logged(constructor) {
-    console.log("Creating new instance of ".concat(constructor.name));
+    console.log(`Creating new instance of ${constructor.name}`);
 }
 //@ts-ignore
-var Example = function () {
-    var _classDecorators = [logged];
-    var _classDescriptor;
-    var _classExtraInitializers = [];
-    var _classThis;
-    var Example = _classThis = /** @class */ (function () {
-        function Example_1() {
+let Example = (() => {
+    let _classDecorators = [logged];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var Example = _classThis = class {
+        constructor() {
             console.log('Example instance created');
         }
-        return Example_1;
-    }());
+    };
     __setFunctionName(_classThis, "Example");
-    (function () {
-        var _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
         __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
         Example = _classThis = _classDescriptor.value;
         if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
         __runInitializers(_classThis, _classExtraInitializers);
     })();
     return Example = _classThis;
-}();
-var example = new Example();
+})();
+const example = new Example();
+function format(value) {
+    return function (target, propertyKey, descriptor) {
+        const originalMethod = descriptor.value;
+        descriptor.value = function () {
+            const result = originalMethod.apply(this);
+            return value ? result.toUpperCase() : result;
+        };
+    };
+}
+let Greeter = (() => {
+    var _a;
+    let _instanceExtraInitializers = [];
+    let _greet_decorators;
+    return _a = class Greeter {
+            constructor(message) {
+                this.greeting = __runInitializers(this, _instanceExtraInitializers);
+                this.greeting = message;
+            }
+            //@ts-ignore
+            greet() {
+                return "Hello, " + this.greeting;
+            }
+        },
+        (() => {
+            const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+            _greet_decorators = [format(true)];
+            __esDecorate(_a, null, _greet_decorators, { kind: "method", name: "greet", static: false, private: false, access: { has: obj => "greet" in obj, get: obj => obj.greet }, metadata: _metadata }, null, _instanceExtraInitializers);
+            if (_metadata) Object.defineProperty(_a, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        })(),
+        _a;
+})();
+const greeter = new Greeter("World");
+console.log(greeter.greet());
+//# sourceMappingURL=decorators.js.map
